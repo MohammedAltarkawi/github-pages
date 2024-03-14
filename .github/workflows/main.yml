@@ -45,7 +45,7 @@ jobs:
     - name: deploy to github pages
       uses: peaceiris/actions-gh-pages@v3
       with:
-        deploy_key: ${{ secrets.actions_deploy_secret }}
+        deploy_key: ${{ secrets.GITHUB_TOKEN }}
         external_repository: MohammedAltarkawi/MohammedAltakawi.github.io
         publish_branch: main
         publish_dir: ./dist
