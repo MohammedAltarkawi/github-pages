@@ -1,0 +1,71 @@
+# This workflow will do a clean install of node dependencies, build the source code and run tests across different versions of node
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
+
+name: Build SPA & Deployment
+
+on: 
+  push:
+    branches:
+      - main
+    # paths:
+    #   - 'package.json'
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [20.x]
+
+    steps:
+    - name: checkout
+      uses: actions/checkout@v3
+    - name: setup pnpm
+      uses: pnpm/action-setup@v2
+      with:
+        version: 8
+    - name: setup node using ${{ matrix.node-version }} 
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: "pnpm"
+    - name: install chrome
+      run: |
+        wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add - 
+        sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
+        sudo apt-get update
+        sudo apt-get install google-chrome-stable 
+    - name: build
+      run: |
+        pnpm install --frozen-lockfile
+        pnpm run build:deploy
+      env:
+        CI: true
+    - name: deploy to github pages
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        deploy_key: ${{ secrets.actions_deploy_secret }}
+        external_repository: MohammedAltarkawi/MohammedAltakawi.github.io
+        publish_branch: main
+        publish_dir: ./dist
+        commitMessage: "PersonalPage upd."
+        keepFiles: false #true
+        emptyCommits: false
+
+    - name: UI5 Deploy
+  # You may pin to the exact commit or the version.
+  # uses: integrtr/ui5-deploy@b3e43802875f58c5beb57bbf892e2b6bc7821e1a
+      uses: integrtr/ui5-deploy@v1.1.0
+      with:
+    # Type of deployment - Neo, CF or BSP
+        type: CF
+    # Credential - User ID
+        user: Mohammedaltarkawi@gmail.com  
+    # Credential - Password
+        password: password
+    # System host url
+    #    host: # default is eu2.hana.ondemand.com
+    # SAP BTP Sub Account ID
+     #   sub-account-id: # optional
+          
