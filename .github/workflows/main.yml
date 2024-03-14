@@ -25,11 +25,6 @@ jobs:
       uses: pnpm/action-setup@v2
       with:
         version: 8
-    - name: setup node using ${{ matrix.node-version }} 
-      uses: actions/setup-node@v3
-      with:
-        node-version: ${{ matrix.node-version }}
-        cache: "pnpm"
     - name: install chrome
       run: |
         wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add - 
