@@ -33,4 +33,4 @@ jobs:
         personal_token: ${{ secrets.PERSONAL_TOKEN }}
         external_repository: MohammedAltarkawi/mohammedaltarkawi.github.io
         publish_branch: main  # default: gh-pages
-        publish_dir: ./public
+        publish_dir: ./dist
