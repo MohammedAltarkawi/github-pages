@@ -35,4 +35,3 @@ jobs:
         external_repository: MohammedAltarkawi/mohammedaltarkawi.github.io
         publish_branch: main  # default: gh-pages
         publish_dir: ./public
-        keepFiles: false
