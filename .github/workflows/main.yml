@@ -24,7 +24,6 @@ jobs:
     - name: build
       run: |
         pnpm install --frozen-lockfile
-        pnpm run build:deploy
       env:
         CI: true
 
