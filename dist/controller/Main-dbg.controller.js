@@ -22,8 +22,10 @@ sap.ui.define(["sap/m/MessageBox", "./BaseController", "sap/ui/core/Theming"], f
     /**
      * @returns {void}
      */
-    toggleTheme: function _toggleTheme() {
-      if (Theming.getTheme() === this._sLightTheme) {
+    toggleTheme: function _toggleTheme(oEvent) {
+      const oSwitch = oEvent.getSource();
+      const sState = oSwitch.getState();
+      if (sState) {
         Theming.setTheme(this._sDarkTheme);
       } else {
         Theming.setTheme(this._sLightTheme);
