@@ -1,0 +1,2 @@
+"use strict";sap.ui.define(["wdio-ui5-service"],function(e){"use strict";const o=e["wdi5"];describe("samples",()=>{it("should log",()=>{const e=o.getLogger();e.log("hello world!")});it.skip("should retrieve a UI5 control",async()=>{const e={selector:{controlType:"sap.m.App",viewName:"ui5.typescript.helloworld.view.App"}};const o=await browser.asControl(e);expect(o).toBeDefined()})})});
+//# sourceMappingURL=sample.test.js.map

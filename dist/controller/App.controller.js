@@ -1,0 +1,2 @@
+"use strict";sap.ui.define(["./BaseController"],function(t){"use strict";function e(t){return t&&t.__esModule&&typeof t.default!=="undefined"?t.default:t}const n=e(t);const s=n.extend("mst.githubpage.controller.App",{onInit:function t(){this.getView().addStyleClass(this.getOwnerComponent().getContentDensityClass())}});return s});
+//# sourceMappingURL=App.controller.js.map
