@@ -1,31 +1,35 @@
 <mvc:View
-	controllerName="mst.githubpage.controller.Main"
-	displayBlock="true"
-	xmlns="sap.m"
-	xmlns:mvc="sap.ui.core.mvc"
-	xmlns:core="sap.ui.core"
-	xmlns:l="sap.ui.layout"
-	xmlns:tnt="sap.tnt"
-	core:require="{
+    controllerName="mst.githubpage.controller.Main"
+    displayBlock="true"
+    xmlns="sap.m"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:core="sap.ui.core"
+    core:require="{
 		formatter: 'mst/githubpage/model/formatter'
-	}">
-
-	<Page showHeader="true">
-		<headerContent>
-			<Switch  change=".toggleTheme"/>
-		</headerContent>
-
-
-			<footer class="mstPageFooter">
-				<OverflowToolbar id="klab" ariaHasPopup="Dialog" class="mstPageFooter">
-					<layoutData>
-						<OverflowToolbarLayoutData priority="AlwaysOverflow"/>
-					</layoutData>
-					<ToolbarSpacer/>
-					<Button icon="sap-icon://lightbulb" ariaHasPopup="Dialog" type="Emphasized" width="5px" press="onOpenDialog" class="roundClass"/>
-				</OverflowToolbar>
-			</footer>
-	</Page>
-	
-
+	}"
+>
+    <Page showHeader="true">
+        <headerContent>
+            <Switch change=".toggleTheme" />
+        </headerContent>
+        <footer class="mstPageFooter">
+            <OverflowToolbar
+                ariaHasPopup="Dialog"
+                class="mstPageFooter"
+            >
+                <layoutData>
+                    <OverflowToolbarLayoutData priority="AlwaysOverflow" />
+                </layoutData>
+                <ToolbarSpacer />
+                <Button
+                    icon="sap-icon://lightbulb"
+                    ariaHasPopup="Dialog"
+                    type="Emphasized"
+                    width="5px"
+                    press="handlePopoverPress"
+                    class="roundClass"
+                />
+            </OverflowToolbar>
+        </footer>
+    </Page>
 </mvc:View>

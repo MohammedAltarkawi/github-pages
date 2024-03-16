@@ -5,7 +5,7 @@
 		id="myPopover"
 		title="titel"
 		class="sapUiResponsivePadding--header sapUiResponsivePadding--footer"
-		placement="Bottom"
+		placement="Top"
 		initialFocus="email">
 		<footer>
 			<OverflowToolbar>

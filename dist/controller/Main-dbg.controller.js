@@ -31,29 +31,32 @@ sap.ui.define(["sap/m/MessageBox", "./BaseController", "sap/ui/core/Theming", "s
         Theming.setTheme(this._sLightTheme);
       }
     },
-    onOpenDialog: function _onOpenDialog(oEvent) {
-      const oButton = oEvent.getSource();
-      // create dialog lazily
-      if (!this.dialogPromise) {
-        this.dialogPromise = this.loadFragment({
-          name: 'mst.githubpage.fragments.InfoPopover'
-        });
-      }
-      this.dialogPromise.then(function (oDialog) {
-        debugger;
-        oDialog.openBy(oButton);
-      });
-    },
+    /* onOpenDialog(oEvent: Event): void {
+    	const oButton = oEvent.getSource() as Button
+    	// create dialog lazily
+    		if (!this.dialogPromise) {
+    			this.dialogPromise = <Promise<Popover>> this.loadFragment({
+    				name: 'mst.githubpage.fragments.InfoPopover'
+    			});
+    		} 
+    		this.dialogPromise.then(function(oDialog) {
+    			debugger
+    			oDialog.openBy(oButton)
+    		});
+    	}   
+    */
     handlePopoverPress: async function _handlePopoverPress(oEvent) {
       const oButton = oEvent.getSource(),
         oView = this.getView();
-      const oPopover = await Fragment.load({
-        id: oView.getId(),
-        name: 'mst.github.view.fragments.InfoPopover',
-        controller: this
-      });
-      oView.addDependent(oPopover);
-      oPopover.openBy(oButton);
+      if (!this.dialogPromise) {
+        this.dialogPromise = await Fragment.load({
+          id: oView.getId(),
+          name: 'mst.githubpage.fragments.InfoPopover',
+          controller: this
+        });
+      }
+      oView.addDependent(this.dialogPromise);
+      this.dialogPromise.openBy(oButton);
     },
     _getInfoPopover: function _getInfoPopover() {}
   });

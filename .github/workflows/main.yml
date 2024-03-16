@@ -26,11 +26,18 @@ jobs:
         pnpm install --frozen-lockfile
       env:
         CI: true
+    - name: npm run build:opt
+      run: |
+        npm install
+        npm run build:opt
+      env:
+        CI: true
+
 
     - name: Deploy
       uses: peaceiris/actions-gh-pages@v3
       with:
         personal_token: ${{ secrets.PERSONAL_TOKEN }}
         external_repository: MohammedAltarkawi/mohammedaltarkawi.github.io
-        publish_branch: main  # default: gh-pages
+        publish_branch: main 
         publish_dir: ./dist

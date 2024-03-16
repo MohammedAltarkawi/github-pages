@@ -6,7 +6,6 @@ import Switch from "sap/m/Switch";
 import Button from "sap/m/Button";
 import Fragment from "sap/ui/core/Fragment";
 import Popover from "sap/m/Popover";
-import Dialog from "sap/m/Dialog";
 
 /**
  * @namespace mst.githubpage.controller
@@ -15,7 +14,7 @@ export default class Main extends BaseController {
 
 	private _sLightTheme = "sap_horizon";
 	private _sDarkTheme = "sap_horizon_dark";
-	private dialogPromise: Promise<Popover>;
+	private dialogPromise: Popover;
 
 	public sayHello(): void {
 		MessageBox.show("Hello World!");
@@ -36,7 +35,7 @@ export default class Main extends BaseController {
 	}
 
 
-	onOpenDialog(oEvent: Event): void {
+	/* onOpenDialog(oEvent: Event): void {
 		const oButton = oEvent.getSource() as Button
 		// create dialog lazily
 			if (!this.dialogPromise) {
@@ -49,19 +48,20 @@ export default class Main extends BaseController {
 				oDialog.openBy(oButton)
 			});
 		}   
-
+ */
 	public async handlePopoverPress(oEvent: Event){
 		const oButton = oEvent.getSource() as Button,
 		oView = this.getView();
-
-		const oPopover = (await Fragment.load({
+		if (!this.dialogPromise) {
+		this.dialogPromise = (await Fragment.load({
             id: oView.getId(),
-            name: 'mst.github.view.fragments.InfoPopover',
+            name: 'mst.githubpage.fragments.InfoPopover',
             controller: this
         })) as Popover;
+	}
 
-		oView.addDependent(oPopover)
-		oPopover.openBy(oButton)
+		oView.addDependent(this.dialogPromise)
+		this.dialogPromise.openBy(oButton)
 	}
 
 	private _getInfoPopover(){
