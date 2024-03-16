@@ -13,10 +13,19 @@
 	<Page showHeader="true">
 		<headerContent>
 			<Switch  change=".toggleTheme"/>
-		</headerContent><content>
-			
-		</content>
+		</headerContent>
 
+
+			<footer class="mstPageFooter">
+				<OverflowToolbar id="klab" ariaHasPopup="Dialog" class="mstPageFooter">
+					<layoutData>
+						<OverflowToolbarLayoutData priority="AlwaysOverflow"/>
+					</layoutData>
+					<ToolbarSpacer/>
+					<Button icon="sap-icon://lightbulb" ariaHasPopup="Dialog" type="Emphasized" width="5px" press="onOpenDialog" class="roundClass"/>
+				</OverflowToolbar>
+			</footer>
 	</Page>
+	
 
 </mvc:View>
