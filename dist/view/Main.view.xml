@@ -22,7 +22,7 @@
                 </layoutData>
                 <ToolbarSpacer />
                 <Button
-                    icon="sap-icon://lightbulb"
+                    icon="sap-icon://question-mark"
                     ariaHasPopup="Dialog"
                     type="Emphasized"
                     width="5px"

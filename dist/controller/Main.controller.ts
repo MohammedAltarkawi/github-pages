@@ -1,10 +1,14 @@
+/* eslint-disable @typescript-eslint/no-unnecessary-type-assertion */
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+
 import MessageBox from "sap/m/MessageBox";
 import BaseController from "./BaseController";
 import Theming from "sap/ui/core/Theming";
 import Event from "sap/ui/base/Event";
 import Switch from "sap/m/Switch";
-import Button from "sap/m/Button";
-import Fragment from "sap/ui/core/Fragment";
 import Popover from "sap/m/Popover";
 
 /**
@@ -49,9 +53,13 @@ export default class Main extends BaseController {
 			});
 		}   
  */
-	public async handlePopoverPress(oEvent: Event){
-		const oButton = oEvent.getSource() as Button,
-		oView = this.getView();
+	public handlePopoverPress(){
+		//@ts-expect-error
+		const webclient = window.sap.cai.webclient ;
+		webclient.toggle();
+
+		//const oButton = oEvent.getSource() as Button,
+		/* oView = this.getView();
 		if (!this.dialogPromise) {
 		this.dialogPromise = (await Fragment.load({
             id: oView.getId(),
@@ -61,7 +69,7 @@ export default class Main extends BaseController {
 	}
 
 		oView.addDependent(this.dialogPromise)
-		this.dialogPromise.openBy(oButton)
+		this.dialogPromise.openBy(oButton) */
 	}
 
 	private _getInfoPopover(){

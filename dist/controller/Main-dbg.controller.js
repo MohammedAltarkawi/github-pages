@@ -1,6 +1,6 @@
 "use strict";
 
-sap.ui.define(["sap/m/MessageBox", "./BaseController", "sap/ui/core/Theming", "sap/ui/core/Fragment"], function (MessageBox, __BaseController, Theming, Fragment) {
+sap.ui.define(["sap/m/MessageBox", "./BaseController", "sap/ui/core/Theming"], function (MessageBox, __BaseController, Theming) {
   "use strict";
 
   function _interopRequireDefault(obj) {
@@ -45,18 +45,22 @@ sap.ui.define(["sap/m/MessageBox", "./BaseController", "sap/ui/core/Theming", "s
     		});
     	}   
     */
-    handlePopoverPress: async function _handlePopoverPress(oEvent) {
-      const oButton = oEvent.getSource(),
-        oView = this.getView();
+    handlePopoverPress: function _handlePopoverPress() {
+      //@ts-expect-error
+      const webclient = window.sap.cai.webclient;
+      webclient.toggle();
+
+      //const oButton = oEvent.getSource() as Button,
+      /* oView = this.getView();
       if (!this.dialogPromise) {
-        this.dialogPromise = await Fragment.load({
-          id: oView.getId(),
-          name: 'mst.githubpage.fragments.InfoPopover',
-          controller: this
-        });
+      this.dialogPromise = (await Fragment.load({
+                id: oView.getId(),
+                name: 'mst.githubpage.fragments.InfoPopover',
+                controller: this
+            })) as Popover;
       }
-      oView.addDependent(this.dialogPromise);
-      this.dialogPromise.openBy(oButton);
+      		oView.addDependent(this.dialogPromise)
+      this.dialogPromise.openBy(oButton) */
     },
     _getInfoPopover: function _getInfoPopover() {}
   });
