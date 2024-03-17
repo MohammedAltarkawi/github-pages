@@ -15,6 +15,8 @@ sap.ui.define(["sap/m/MessageBox", "./BaseController", "sap/ui/core/Theming"], f
       BaseController.prototype.constructor.apply(this, arguments);
       this._sLightTheme = "sap_horizon";
       this._sDarkTheme = "sap_horizon_dark";
+      //@ts-expect-error
+      this.webclient = window.sap.cai.webclient;
     },
     sayHello: function _sayHello() {
       MessageBox.show("Hello World!");
@@ -27,42 +29,15 @@ sap.ui.define(["sap/m/MessageBox", "./BaseController", "sap/ui/core/Theming"], f
       const sState = oSwitch.getState();
       if (sState) {
         Theming.setTheme(this._sDarkTheme);
+        this.webclient.setTheme(this._sDarkTheme);
       } else {
         Theming.setTheme(this._sLightTheme);
+        this.webclient.setTheme(this._sLightTheme);
       }
     },
-    /* onOpenDialog(oEvent: Event): void {
-    	const oButton = oEvent.getSource() as Button
-    	// create dialog lazily
-    		if (!this.dialogPromise) {
-    			this.dialogPromise = <Promise<Popover>> this.loadFragment({
-    				name: 'mst.githubpage.fragments.InfoPopover'
-    			});
-    		} 
-    		this.dialogPromise.then(function(oDialog) {
-    			debugger
-    			oDialog.openBy(oButton)
-    		});
-    	}   
-    */
     handlePopoverPress: function _handlePopoverPress() {
-      //@ts-expect-error
-      const webclient = window.sap.cai.webclient;
-      webclient.toggle();
-
-      //const oButton = oEvent.getSource() as Button,
-      /* oView = this.getView();
-      if (!this.dialogPromise) {
-      this.dialogPromise = (await Fragment.load({
-                id: oView.getId(),
-                name: 'mst.githubpage.fragments.InfoPopover',
-                controller: this
-            })) as Popover;
-      }
-      		oView.addDependent(this.dialogPromise)
-      this.dialogPromise.openBy(oButton) */
-    },
-    _getInfoPopover: function _getInfoPopover() {}
+      this.webclient.toggle();
+    }
   });
   return Main;
 });
